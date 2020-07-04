@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "991487403502",
+    "firebase_url": "https://blogapp-8f686.firebaseio.com",
+    "project_id": "blogapp-8f686",
+    "storage_bucket": "blogapp-8f686.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991487403502:android:806e16484e44a277c89aff",
+        "android_client_info": {
+          "package_name": "com.issa.blogapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991487403502-8q19aa804nipj161833gg5361029s3md.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhEHyGckRA5oET3UW9oT4o8BVfBtPUo7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991487403502-8q19aa804nipj161833gg5361029s3md.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "991487403502-acliragf6go3teida03vg2d03s7mrb50.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.issa.blogapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
