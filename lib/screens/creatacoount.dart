@@ -1,27 +1,19 @@
-import 'package:blogapp/Authencation.dart';
-import 'package:blogapp/screens/creatacoount.dart';
 import 'package:blogapp/widget/colortheme.dart';
 import 'package:flutter/material.dart';
 
-class LoginRegisterPager extends StatefulWidget {
-  LoginRegisterPager({this.auth, this.onSignedIn});
-  final AuthImpementaion auth;
-  final VoidCallback onSignedIn;
+import 'loginRegisterPage.dart';
+
+class CreateAcconut extends StatefulWidget {
   @override
-  _LoginRegisterPagerState createState() => _LoginRegisterPagerState();
+  _CreateAcconutState createState() => _CreateAcconutState();
 }
 
-enum FormType {
-  login,
-  register,
-}
-
-class _LoginRegisterPagerState extends State<LoginRegisterPager> {
+class _CreateAcconutState extends State<CreateAcconut> {
   final formkey = GlobalKey<FormState>();
-  FormType _formType = FormType.login;
 
   String _email = '';
-  String _password = '';
+  final TextEditingController _pass = TextEditingController();
+  final TextEditingController _confirmPass = TextEditingController();
   bool saveAttempted = false;
 
   bool vaildateAndSave() {
@@ -34,36 +26,11 @@ class _LoginRegisterPagerState extends State<LoginRegisterPager> {
     }
   }
 
-  void moveToRegister() {
-    formkey.currentState.reset();
-
-    setState(() {
-      _formType = FormType.register;
-    });
-  }
-
-  void moveToLogin() {
-    formkey.currentState.reset();
-
-    setState(() {
-      _formType = FormType.login;
-    });
-  }
-
   void vaildateAndSunmit() async {
     if (vaildateAndSave()) {
       try {
-        if (formkey == FormType.login) {
-          String userId = await widget.auth.SignIn(_email, _password);
-          print('login userId = ' + userId);
-        } else {
-          String userId = await widget.auth.SignIn(_email, _password);
-          print('Register userId = ' + userId);
-        }
-        widget.onSignedIn();
-      } catch (e) {
-        print("Error =" + e.toString());
-      }
+        if (formkey == FormType.login) {}
+      } catch (e) {}
     }
   }
 
@@ -102,11 +69,11 @@ class _LoginRegisterPagerState extends State<LoginRegisterPager> {
   List<Widget> createInput() {
     return [
       SizedBox(
-        height: 10.0,
+        height: 5.0,
       ),
       logo(),
       SizedBox(
-        height: 10.0,
+        height: 5.0,
       ),
       TextFormField(
         autovalidate: saveAttempted,
@@ -142,11 +109,7 @@ class _LoginRegisterPagerState extends State<LoginRegisterPager> {
       ),
       TextFormField(
         autovalidate: saveAttempted,
-        onChanged: (textValue) {
-          setState(() {
-            _password = textValue;
-          });
-        },
+        controller: _pass,
         validator: (pwValue) {
           if (pwValue.isEmpty) {
             return 'This field is mandatory';
@@ -157,13 +120,34 @@ class _LoginRegisterPagerState extends State<LoginRegisterPager> {
           return null;
         },
         decoration: InputDecoration(
-          hintText: 'Passowrd',
+          labelText: 'Passowrd',
           hintStyle: TextStyle(color: Colors.black),
         ),
         obscureText: true,
       ),
       SizedBox(
-        height: 20,
+        height: 10,
+      ),
+      TextFormField(
+        autovalidate: saveAttempted,
+        controller: _confirmPass,
+        validator: (pwValue) {
+          if (pwValue.isEmpty) {
+            return 'This field is mandatory';
+          }
+          if (pwValue != _pass.text) {
+            return 'Not same Passowrd';
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          labelText: 'Confirm Passowrd',
+          hintStyle: TextStyle(color: Colors.black),
+        ),
+        obscureText: true,
+      ),
+      SizedBox(
+        height: 10,
       ),
     ];
   }
@@ -173,19 +157,21 @@ class _LoginRegisterPagerState extends State<LoginRegisterPager> {
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 100.0,
-        child: Image.asset('images/logoblog.jpg'),
+        child: Text(
+          'Create Account',
+          style: TextStyle(fontSize: 16, color: Colors.white),
+        ),
       ),
     );
   }
 
   List<Widget> createButton() {
-    if (_formType == FormType.login) {
+    {
       return [
         RaisedButton(
           splashColor: Colors.orange,
           child: Text(
-            'Login',
+            'Create Account',
             style: TextStyle(
               fontSize: 20,
             ),
@@ -196,15 +182,17 @@ class _LoginRegisterPagerState extends State<LoginRegisterPager> {
         ),
         FlatButton(
             child: Text(
-              'Not have an Account? Create Account',
+              'Already have an Acconut? Login',
               style: TextStyle(
                 fontSize: 14,
               ),
             ),
             textColor: Colors.grey,
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreateAcconut()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LoginRegisterPager()));
             }),
       ];
     }
